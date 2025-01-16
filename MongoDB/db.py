@@ -130,3 +130,22 @@ for r in result:
 {'year': 2025, 'month': 4, 'product_id': 'Костюм', 'total_quantity': 54}
 
 """
+
+# На backend можно вот так юзать mongo:
+"""
+app.post("/add_sale/")
+def add_sale(product_id: str, quantity: int, date: str):
+    sale_data = {
+        "product_id": product_id,
+        "quantity": quantity,
+        "date": datetime.fromisoformat(date)
+    }
+    collection.insert_one(sale_data)
+    return {"message": "Sale added successfully"}
+
+@app.get("/sales/")
+def get_sales():
+    sales = list(collection.find())
+    return {"sales": sales}
+"""
+
